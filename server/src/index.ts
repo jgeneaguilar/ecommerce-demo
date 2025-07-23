@@ -1,14 +1,17 @@
-import fastify from 'fastify';
+import { createApp } from './app';
 
-const server = fastify();
-const port = 3000;
+const start = async () => {
+  try {
+    const app = await createApp();
 
-server.get('/', async () => {
-  return 'Hello World!';
-});
+    const port = 3000;
 
-server.listen({ port }, () => {
-  console.info(`Server ready at port: ${port}`);
-});
+    await app.listen({ port });
+    console.info(`Server ready at port: ${port}`);
+  } catch (err) {
+    console.error('Error starting server:', err);
+    process.exit(1);
+  }
+};
 
-export default server;
+start();
