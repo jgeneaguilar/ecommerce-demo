@@ -1,0 +1,22 @@
+{
+  "name": "fastify-mysql-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm --recursive --parallel dev",
+    "dev:server": "pnpm --filter server dev",
+    "dev:client": "pnpm --filter client dev",
+    "build": "pnpm --recursive build",
+    "build:server": "pnpm --filter server build",
+    "build:client": "pnpm --filter client build",
+    "test": "pnpm --recursive test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.4",
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

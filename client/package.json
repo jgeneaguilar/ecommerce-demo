@@ -1,0 +1,11 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "echo \"Client dev server not set up yet\"",
+    "build": "echo \"Client build not set up yet\"",
+    "type-check": "echo \"Client type-check not set up yet\""
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
