@@ -1,4 +1,5 @@
 import fastify, { FastifyInstance, FastifyServerOptions } from 'fastify';
+import { databasePlugin } from './shared/database/database.plugin';
 
 export const createApp = async (
   options: FastifyServerOptions = {}
@@ -6,6 +7,8 @@ export const createApp = async (
   const app = fastify({
     ...options,
   });
+
+  await app.register(databasePlugin);
 
   app.get('/health', async () => {
     return {
