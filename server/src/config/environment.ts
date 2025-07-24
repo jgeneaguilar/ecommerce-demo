@@ -1,4 +1,4 @@
-export const config = {
+const config = {
   // Server
   PORT: Number(process.env.PORT) || 3000,
   HOST: process.env.HOST || '0.0.0.0',
@@ -14,3 +14,7 @@ export const config = {
   // Logging
   LOG_LEVEL: process.env.LOG_LEVEL || 'info',
 } as const;
+
+export default config;
+
+module.exports = config;
