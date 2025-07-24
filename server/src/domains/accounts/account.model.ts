@@ -1,9 +1,11 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, CreationOptional } from 'sequelize';
 import { SequelizeConnection } from '../../shared/database';
 
 export class Account extends Model {
   declare id: string;
   declare name: string;
+  declare readonly createdAt: CreationOptional<Date>;
+  declare readonly updatedAt: CreationOptional<Date>;
 }
 
 const sequelizeConnection = SequelizeConnection.getInstance();

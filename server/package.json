@@ -14,6 +14,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@sinclair/typebox": "^0.34.38",
     "dotenv": "^17.2.0",
     "fastify": "^5.4.0",
     "mysql2": "^3.14.2",
