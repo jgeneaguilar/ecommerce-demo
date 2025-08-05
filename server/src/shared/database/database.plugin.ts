@@ -1,7 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { SequelizeConnection } from './index';
-
-const sequelizeConnection = SequelizeConnection.getInstance();
+import { sequelizeConnection } from './index';
 
 declare module 'fastify' {
   interface FastifyInstance {
@@ -9,7 +7,9 @@ declare module 'fastify' {
   }
 }
 
-export const databasePlugin = async (fastify: FastifyInstance) => {
+export const databasePlugin = async (
+  fastify: FastifyInstance
+): Promise<void> => {
   try {
     await sequelizeConnection.authenticate();
     fastify.log.info('Database connection established successfully!');
@@ -21,7 +21,7 @@ export const databasePlugin = async (fastify: FastifyInstance) => {
       fastify.log.info('Database synchronized');
     }
 
-    fastify.addHook('onClose', async (_) => {
+    fastify.addHook('onClose', async () => {
       await sequelizeConnection.close();
       fastify.log.info('Database connection closed');
     });

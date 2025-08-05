@@ -4,7 +4,7 @@ dotenv.config();
 import { createApp } from './app';
 import config from './config/environment';
 
-const start = async () => {
+const start = async (): Promise<void> => {
   try {
     const app = await createApp();
 

@@ -11,6 +11,7 @@ export default tseslint.config(
   {
     rules: {
       '@typescript-eslint/explicit-function-return-type': 'error',
+      '@typescript-eslint/no-explicit-any': 'off', // TODO: turn on after resolving error handling
     },
   }
 );

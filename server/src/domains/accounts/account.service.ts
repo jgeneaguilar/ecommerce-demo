@@ -1,5 +1,5 @@
 import { Account } from './account.model';
-import { AccountDTO } from './account.dto';
+import * as AccountDTO from './account.dto';
 import {
   Account as AccountType,
   AccountListResponse,

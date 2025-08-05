@@ -1,5 +1,5 @@
 import { DataTypes, Model, CreationOptional } from 'sequelize';
-import { SequelizeConnection } from '../../shared/database';
+import { sequelizeConnection } from '../../shared/database';
 
 export class Account extends Model {
   declare id: string;
@@ -7,8 +7,6 @@ export class Account extends Model {
   declare readonly createdAt: CreationOptional<Date>;
   declare readonly updatedAt: CreationOptional<Date>;
 }
-
-const sequelizeConnection = SequelizeConnection.getInstance();
 
 Account.init(
   {
