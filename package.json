@@ -18,5 +18,10 @@
   "packageManager": "pnpm@10.12.4",
   "engines": {
     "node": ">=22.0.0"
-  }
+  },
+  "workspaces": [
+    "client",
+    "server",
+    "shared"
+  ]
 }

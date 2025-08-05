@@ -1,6 +1,6 @@
 import fastify, { FastifyInstance, FastifyServerOptions } from 'fastify';
 import { databasePlugin } from './shared/database/database.plugin';
-import { accountPlugin } from './domains/accounts/account.plugin';
+import { userPlugin } from './domains/users/user.plugin';
 import fastifyCors from '@fastify/cors';
 
 export const createApp = async (
@@ -17,7 +17,7 @@ export const createApp = async (
   });
 
   // Domain plugins
-  await app.register(accountPlugin, { prefix: '/v1/accounts' });
+  await app.register(userPlugin, { prefix: '/v1/users' });
 
   app.get('/health', async () => {
     return {

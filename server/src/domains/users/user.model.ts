@@ -1,14 +1,14 @@
 import { DataTypes, Model, CreationOptional } from 'sequelize';
 import { sequelizeConnection } from '../../shared/database';
 
-export class Account extends Model {
+export class User extends Model {
   declare id: string;
   declare name: string;
   declare readonly createdAt: CreationOptional<Date>;
   declare readonly updatedAt: CreationOptional<Date>;
 }
 
-Account.init(
+User.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -34,8 +34,8 @@ Account.init(
   },
   {
     sequelize: sequelizeConnection,
-    modelName: 'Account',
-    tableName: 'accounts',
+    modelName: 'User',
+    tableName: 'users',
     timestamps: true,
   }
 );

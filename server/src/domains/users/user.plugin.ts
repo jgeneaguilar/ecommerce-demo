@@ -1,42 +1,44 @@
 import { FastifyPluginAsync, FastifyRequest, FastifyReply } from 'fastify';
-import { AccountService } from './account.service';
-import { AccountQuery, CreateAccount, UpdateAccount } from './account.types';
+import { UserService } from './user.service';
 import {
-  AccountSchema,
-  AccountListResponseSchema,
-  AccountQuerySchema,
-  AccountResponseSchema,
-  CreateAccountSchema,
+  UserQuery,
+  CreateUser,
+  UpdateUser,
+  UserSchema,
+  UserListResponseSchema,
+  UserQuerySchema,
+  UserResponseSchema,
+  CreateUserSchema,
   ErrorSchema,
-  UpdateAccountSchema,
-} from './account.schemas';
+  UpdateUserSchema,
+} from '@project/shared';
 
-interface AccountParams {
+interface UserParams {
   id: string;
 }
 
-export const accountPlugin: FastifyPluginAsync = async (fastify) => {
-  const accountService = new AccountService();
+export const userPlugin: FastifyPluginAsync = async (fastify) => {
+  const userService = new UserService();
 
   fastify.get<{
-    Querystring: AccountQuery;
+    Querystring: UserQuery;
   }>(
     '/',
     {
       schema: {
-        querystring: AccountQuerySchema,
+        querystring: UserQuerySchema,
         response: {
-          200: AccountListResponseSchema,
+          200: UserListResponseSchema,
           500: ErrorSchema,
         },
       },
     },
     async (
-      request: FastifyRequest<{ Querystring: AccountQuery }>,
+      request: FastifyRequest<{ Querystring: UserQuery }>,
       reply: FastifyReply
     ) => {
       try {
-        const result = await accountService.findAll(request.query);
+        const result = await userService.findAll(request.query);
 
         return result;
       } catch (error: any) {
@@ -51,28 +53,28 @@ export const accountPlugin: FastifyPluginAsync = async (fastify) => {
   );
 
   fastify.post<{
-    Body: CreateAccount;
+    Body: CreateUser;
   }>(
     '/',
     {
       schema: {
-        body: CreateAccountSchema,
+        body: CreateUserSchema,
         response: {
-          201: AccountResponseSchema,
+          201: UserResponseSchema,
           400: ErrorSchema,
           500: ErrorSchema,
         },
       },
     },
     async (
-      request: FastifyRequest<{ Body: CreateAccount }>,
+      request: FastifyRequest<{ Body: CreateUser }>,
       reply: FastifyReply
     ) => {
       try {
-        const account = await accountService.create(request.body);
+        const user = await userService.create(request.body);
         reply.status(201);
 
-        return account;
+        return user;
       } catch (error: any) {
         if (error.message === 'Name already exists') {
           reply.status(400);
@@ -94,7 +96,7 @@ export const accountPlugin: FastifyPluginAsync = async (fastify) => {
     }
   );
 
-  fastify.get<{ Params: AccountParams }>(
+  fastify.get<{ Params: UserParams }>(
     '/:id',
     {
       schema: {
@@ -106,7 +108,7 @@ export const accountPlugin: FastifyPluginAsync = async (fastify) => {
           required: ['id'],
         },
         response: {
-          200: AccountResponseSchema,
+          200: UserResponseSchema,
           404: ErrorSchema,
           500: ErrorSchema,
         },
@@ -114,18 +116,18 @@ export const accountPlugin: FastifyPluginAsync = async (fastify) => {
     },
     async (request, reply) => {
       try {
-        const account = await accountService.findById(request.params.id);
+        const user = await userService.findById(request.params.id);
 
-        if (!account) {
+        if (!user) {
           reply.status(404);
           return {
             error: 'Not Found',
-            message: 'Account not found',
+            message: 'User not found',
             statusCode: 404,
           };
         }
 
-        return account;
+        return user;
       } catch (error: any) {
         reply.status(500);
         return {
@@ -137,7 +139,7 @@ export const accountPlugin: FastifyPluginAsync = async (fastify) => {
     }
   );
 
-  fastify.put<{ Params: AccountParams; Body: UpdateAccount }>(
+  fastify.put<{ Params: UserParams; Body: UpdateUser }>(
     '/:id',
     {
       schema: {
@@ -148,33 +150,33 @@ export const accountPlugin: FastifyPluginAsync = async (fastify) => {
           },
           required: ['id'],
         },
-        body: UpdateAccountSchema,
+        body: UpdateUserSchema,
         response: {
-          200: AccountSchema,
+          200: UserSchema,
           404: ErrorSchema,
           500: ErrorSchema,
         },
       },
     },
     async (
-      request: FastifyRequest<{ Params: AccountParams; Body: UpdateAccount }>,
+      request: FastifyRequest<{ Params: UserParams; Body: UpdateUser }>,
       reply: FastifyReply
     ) => {
       try {
-        const accountId = request.params.id;
-        const account = await accountService.update(accountId, request.body);
+        const userid = request.params.id;
+        const user = await userService.update(userid, request.body);
 
-        if (!account) {
+        if (!user) {
           reply.status(404);
 
           return {
             error: 'Not Found',
-            message: 'Account not found',
+            message: 'User not found',
             statusCode: 404,
           };
         }
 
-        return account;
+        return user;
       } catch (error: any) {
         reply.status(500);
 
@@ -188,7 +190,7 @@ export const accountPlugin: FastifyPluginAsync = async (fastify) => {
   );
 
   fastify.delete<{
-    Params: AccountParams;
+    Params: UserParams;
   }>(
     '/:id',
     {
@@ -213,18 +215,18 @@ export const accountPlugin: FastifyPluginAsync = async (fastify) => {
       },
     },
     async (
-      request: FastifyRequest<{ Params: AccountParams }>,
+      request: FastifyRequest<{ Params: UserParams }>,
       reply: FastifyReply
     ) => {
       try {
-        const accountId = request.params.id;
-        const success = await accountService.delete(accountId);
+        const userid = request.params.id;
+        const success = await userService.delete(userid);
 
         if (!success) {
           reply.status(404);
           return {
             error: 'Not Found',
-            message: 'Account not found',
+            message: 'User not found',
             statusCode: 404,
           };
         }

@@ -12,7 +12,6 @@ A learning project showcasing backend development with Node.js, TypeScript, and 
 ## Features
 
 - RESTful API design
-- Account management (CRUD operations)
 - Database modeling with Sequelize
 - TypeScript for type safety
 - Input validation with TypeBox
@@ -79,11 +78,11 @@ pnpm dev:client  # Frontend only
 
 ## API Endpoints (WIP)
 
-- `GET /api/accounts` - List all accounts
-- `POST /api/accounts` - Create new account
-- `GET /api/accounts/:id` - Get account by ID
-- `PUT /api/accounts/:id` - Update account
-- `DELETE /api/accounts/:id` - Delete account
+- `GET /api/users` - List all users
+- `POST /api/users` - Create new user
+- `GET /api/users/:id` - Get user by ID
+- `PUT /api/users/:id` - Update user
+- `DELETE /api/users/:id` - Delete user
 
 ## Learning Goals
 

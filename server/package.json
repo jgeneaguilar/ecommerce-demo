@@ -22,6 +22,7 @@
   "description": "",
   "dependencies": {
     "@fastify/cors": "^11.0.1",
+    "@project/shared": "workspace:*",
     "@sinclair/typebox": "^0.34.38",
     "dotenv": "^17.2.0",
     "fastify": "^5.4.0",

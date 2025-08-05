@@ -1,6 +1,6 @@
 import { Type } from '@sinclair/typebox';
 
-export const AccountSchema = Type.Object({
+export const UserSchema = Type.Object({
   id: Type.String({ format: 'uuid' }),
   name: Type.String({ minLength: 2, maxLength: 50 }),
   createdAt: Type.String({ format: 'date-time' }),
@@ -8,24 +8,24 @@ export const AccountSchema = Type.Object({
 });
 
 //#region Request Schemas
-export const CreateAccountSchema = Type.Object({
+export const CreateUserSchema = Type.Object({
   name: Type.String({ minLength: 2, maxLength: 50 }),
 });
 
-export const UpdateAccountSchema = Type.Object({
+export const UpdateUserSchema = Type.Object({
   name: Type.String({ minLength: 2, maxLength: 50 }),
 });
 
-export const AccountQuerySchema = Type.Object({
+export const UserQuerySchema = Type.Object({
   page: Type.Optional(Type.Number({ minimum: 1 })),
   limit: Type.Optional(Type.Number({ minimum: 1, maximum: 100 })),
 });
 //#endregion
 
 //#region Response Schemas
-export const AccountResponseSchema = AccountSchema;
-export const AccountListResponseSchema = Type.Object({
-  accounts: Type.Array(AccountSchema),
+export const UserResponseSchema = UserSchema;
+export const UserListResponseSchema = Type.Object({
+  users: Type.Array(UserSchema),
   pagination: Type.Object({
     page: Type.Number(),
     limit: Type.Number(),
@@ -35,6 +35,7 @@ export const AccountListResponseSchema = Type.Object({
 });
 //#endregion
 
+// TODO: implement proper error handling
 export const ErrorSchema = Type.Object({
   error: Type.String(),
   message: Type.String(),

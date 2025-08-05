@@ -1,9 +1,9 @@
-import { AccountPage } from './components/AccountPage';
+import { UserPage } from './components/UserPage';
 
 function App() {
   return (
     <div>
-      <AccountPage />
+      <UserPage />
     </div>
   );
 }
