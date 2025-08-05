@@ -12,7 +12,7 @@ export const createApp = async (
 
   await app.register(databasePlugin);
   await app.register(fastifyCors, {
-    origin: true,
+    origin: process.env.CORS_ORIGIN?.split(',') || ['http://localhost:5173'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   });
 
