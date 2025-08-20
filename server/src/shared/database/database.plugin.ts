@@ -1,5 +1,6 @@
 import { FastifyInstance } from 'fastify';
 import { sequelizeConnection } from './index';
+import { defineAssociations } from './associations';
 
 declare module 'fastify' {
   interface FastifyInstance {
@@ -15,6 +16,8 @@ export const databasePlugin = async (
     fastify.log.info('Database connection established successfully!');
 
     fastify.decorate('db', sequelizeConnection);
+
+    defineAssociations();
 
     if (process.env.NODE_ENV === 'development') {
       await sequelizeConnection.sync({ alter: true });
