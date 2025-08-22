@@ -1,10 +1,11 @@
 import { Type } from '@sinclair/typebox';
+import { PaginationSchema } from './common.schemas';
 
 export const BrandSchema = Type.Object({
   id: Type.String({ format: 'uuid' }),
   name: Type.String({ minLength: 2, maxLength: 50 }),
-  description: Type.String({ minLength: 2, maxLength: 500 }),
-  logo_url: Type.String({ format: 'uri' }),
+  description: Type.Optional(Type.String({ minLength: 2, maxLength: 500 })),
+  logo_url: Type.Optional(Type.String({ format: 'uri' })),
   createdAt: Type.String({ format: 'date-time' }),
   updatedAt: Type.String({ format: 'date-time' }),
 });
@@ -12,8 +13,8 @@ export const BrandSchema = Type.Object({
 //#region Request Schemas
 export const CreateBrandSchema = Type.Object({
   name: Type.String({ minLength: 2, maxLength: 50 }),
-  description: Type.String({ minLength: 2, maxLength: 500 }),
-  logo_url: Type.String({ format: 'uri' }),
+  description: Type.Optional(Type.String({ minLength: 2, maxLength: 500 })),
+  logo_url: Type.Optional(Type.String({ format: 'uri' })),
 });
 
 export const UpdateBrandSchema = Type.Partial(CreateBrandSchema);
@@ -32,11 +33,6 @@ export const BrandListQuerySchema = Type.Object({
 export const BrandResponseSchema = BrandSchema;
 export const BrandListResponseSchema = Type.Object({
   brands: Type.Array(BrandSchema),
-  pagination: Type.Object({
-    page: Type.Number(),
-    limit: Type.Number(),
-    total: Type.Number(),
-    totalPages: Type.Number(),
-  }),
+  pagination: PaginationSchema,
 });
 //#endregion

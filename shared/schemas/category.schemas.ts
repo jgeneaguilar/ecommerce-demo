@@ -1,10 +1,11 @@
 import { Type } from '@sinclair/typebox';
+import { PaginationSchema } from './common.schemas';
 
 export const CategorySchema = Type.Object({
   id: Type.String({ format: 'uuid' }),
   name: Type.String({ minLength: 2, maxLength: 50 }),
-  description: Type.String({ minLength: 2, maxLength: 500 }),
-  parent_category_id: Type.String({ format: 'uuid' }),
+  description: Type.Optional(Type.String({ minLength: 2, maxLength: 500 })),
+  parent_category_id: Type.Optional(Type.String({ format: 'uuid' })),
   createdAt: Type.String({ format: 'date-time' }),
   updatedAt: Type.String({ format: 'date-time' }),
 });
@@ -12,8 +13,8 @@ export const CategorySchema = Type.Object({
 //#region Request Schemas
 export const CreateCategorySchema = Type.Object({
   name: Type.String({ minLength: 2, maxLength: 50 }),
-  description: Type.String({ minLength: 2, maxLength: 500 }),
-  parent_category_id: Type.String({ format: 'uuid' }),
+  description: Type.Optional(Type.String({ minLength: 2, maxLength: 500 })),
+  parent_category_id: Type.Optional(Type.String({ format: 'uuid' })),
 });
 
 export const UpdateCategorySchema = Type.Partial(CreateCategorySchema);
@@ -32,11 +33,6 @@ export const CategoryListQuerySchema = Type.Object({
 export const CategoryResponseSchema = CategorySchema;
 export const CategoryListResponseSchema = Type.Object({
   categories: Type.Array(CategorySchema),
-  pagination: Type.Object({
-    page: Type.Number(),
-    limit: Type.Number(),
-    total: Type.Number(),
-    totalPages: Type.Number(),
-  }),
+  pagination: PaginationSchema,
 });
 //#endregion

@@ -1,12 +1,12 @@
 import { FastifyPluginAsync, FastifyRequest, FastifyReply } from 'fastify';
 import { UserService } from './user.service';
 import {
-  UserQuery,
+  UserListQuery,
   CreateUser,
   UpdateUser,
   UserSchema,
   UserListResponseSchema,
-  UserQuerySchema,
+  UserListQuerySchema,
   UserResponseSchema,
   CreateUserSchema,
   ErrorSchema,
@@ -21,12 +21,12 @@ export const userPlugin: FastifyPluginAsync = async (fastify) => {
   const userService = new UserService();
 
   fastify.get<{
-    Querystring: UserQuery;
+    Querystring: UserListQuery;
   }>(
     '/',
     {
       schema: {
-        querystring: UserQuerySchema,
+        querystring: UserListQuerySchema,
         response: {
           200: UserListResponseSchema,
           500: ErrorSchema,
@@ -34,7 +34,7 @@ export const userPlugin: FastifyPluginAsync = async (fastify) => {
       },
     },
     async (
-      request: FastifyRequest<{ Querystring: UserQuery }>,
+      request: FastifyRequest<{ Querystring: UserListQuery }>,
       reply: FastifyReply
     ) => {
       try {

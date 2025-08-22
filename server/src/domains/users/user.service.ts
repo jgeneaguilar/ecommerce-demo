@@ -3,7 +3,7 @@ import * as UserDTO from './user.dto';
 import {
   User as UserType,
   UserListResponse,
-  UserQuery,
+  UserListQuery,
   CreateUser,
   UpdateUser,
 } from '@project/shared';
@@ -28,7 +28,7 @@ export class UserService {
     return User.findByPk(id);
   }
 
-  async findAll(query: UserQuery = {}): Promise<UserListResponse> {
+  async findAll(query: UserListQuery = {}): Promise<UserListResponse> {
     const { page = 1, limit = 20 } = query;
     const offset = (page - 1) * limit;
 

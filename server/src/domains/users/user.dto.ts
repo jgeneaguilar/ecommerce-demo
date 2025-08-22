@@ -1,5 +1,9 @@
 import { User } from './user.model';
-import { User as UserType, UserListResponse } from '@project/shared';
+import {
+  User as UserType,
+  UserListResponse,
+  Pagination,
+} from '@project/shared';
 
 export const toResponse = (user: User): UserType => {
   return {
@@ -12,12 +16,7 @@ export const toResponse = (user: User): UserType => {
 
 export const toListResponse = (
   users: User[],
-  pagination: {
-    page: number;
-    limit: number;
-    total: number;
-    totalPages: number;
-  }
+  pagination: Pagination
 ): UserListResponse => {
   return {
     users: users.map((user) => toResponse(user)),

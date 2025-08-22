@@ -1,4 +1,5 @@
 import { Type } from '@sinclair/typebox';
+import { PaginationSchema } from './common.schemas';
 
 export const ProductSchema = Type.Object({
   id: Type.String({ format: 'uuid' }),
@@ -38,11 +39,6 @@ export const ProductListQuerySchema = Type.Object({
 export const ProductResponseSchema = ProductSchema;
 export const ProductListResponseSchema = Type.Object({
   products: Type.Array(ProductSchema),
-  pagination: Type.Object({
-    page: Type.Number(),
-    limit: Type.Number(),
-    total: Type.Number(),
-    totalPages: Type.Number(),
-  }),
+  pagination: PaginationSchema,
 });
 //#endregion
